@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portifolio</title>
+    <link rel="stylesheet" href="/Projetos/AppClimaPython/static/climaPython.css">
+    <link href="../static/prism.css" rel="stylesheet" />
+
+</head>
+<header>
+    <a href="">
+        <h1 class="bemvindo">CALCULADORA JAVA</h1>
+    </a>
+
+    <ul class="listHeader">
+
+        <a href="/templates/Contato.html">
+            <button class="btn">
+                <span>contato</span><i></i>
+            </button>
+        </a>
+
+        <a href="/templates/Projetos.html">
+            <button class="btn">
+                <span>projetos</span><i></i>
+            </button>
+        </a>
+
+        <a href="/templates/ToDo.html">
+            <button class="btn">
+                <span>TO DO</span><i></i>
+            </button>
+        </a>
+
+    </ul>
+</header>
+
+<body>
+    <div class="center-lista">
+        <div class="lista">
+            <div class="descricao">
+                <p>
+                    Este é um aplicativo de previsão do tempo desenvolvido em Python usando a biblioteca Tkinter para a
+                    interface gráfica. Ele permite que os usuários insiram o nome de uma cidade e obtenham informações
+                    sobre o clima atual, incluindo temperatura, descrição do clima e horário local. O aplicativo também
+                    exibe um ícone de sol ou lua, dependendo do horário do dia na localização fornecida. As informações
+                    são obtidas da API do OpenWeatherMap e são apresentadas de forma clara e organizada na interface do
+                    usuário. O design do aplicativo é simples e eficaz, com uma paleta de cores agradável e elementos
+                    gráficos bem integrados.
+
+                <h3>
+                    Recursos Principais:
+                </h3>
+                <ul>
+                    Obtenção de dados do clima: O aplicativo faz uma solicitação HTTP para a API do OpenWeatherMap para
+                    obter dados atualizados sobre o clima da cidade inserida pelo usuário.<br><br>
+
+                    Exibição de informações relevantes: Após obter os dados do clima, o aplicativo exibe informações
+                    importantes, como temperatura, descrição do clima, localização e horário local.<br><br>
+
+                    Determinação do período do dia: Com base no horário local da cidade fornecida, o aplicativo exibe um
+                    ícone de sol ou lua, indicando se é dia ou noite naquela região.<br><br>
+
+                    Interface gráfica intuitiva: Utiliza a biblioteca Tkinter para criar uma interface gráfica de
+                    usuário (GUI) amigável e interativa, com entrada de cidade, botão de visualização e áreas designadas
+                    para exibir as informações do clima de forma organizada.<br><br>
+
+                    Design responsivo: O aplicativo ajusta dinamicamente o esquema de cores da interface e o ícone
+                    exibido com base no período do dia, oferecendo uma experiência visual coesa e agradável.<br><br>
+
+                    Código modular e organizado: O código é estruturado de forma modular e bem organizada, com funções
+                    separadas para diferentes tarefas, facilitando a manutenção, a expansão e a compreensão do projeto.<br><br>
+
+                </ul>
+                <div class="codigo">
+                    <p class="tipo">codigo</p>
+                    <P>ou clique <a
+                            href="https://github.com/kinkoof/Calculadora_java/blob/main/Calculadora/src/MainPanel.java">aqui</a>
+                        para visualizar o codigo no GitHub</P>
+
+                    <pre>
+<code class="language-python line-numbers">
+import java.awt.Color;
+import tkinter
+from tkinter import *
+from tkinter import ttk
+from PIL import ImageTk, Image
+import requests
+import datetime
+import time
+from datetime import datetime
+import pytz
+import pycountry_convert as pc
+import json
+
+################# cores ###############
+co0 = "#444466"  # Preta
+co1 = "#feffff"  # branca
+co2 = "#6f9fbd"  # azul
+
+fundo_dia = "#6cc4cc"
+fundo_noite = "#484f60"
+fundo_tarde = "#bfb86d"
+
+fundo = fundo_dia
+
+janela = Tk()
+janela.title('')
+janela.geometry('320x350')
+janela.configure(bg=fundo)
+
+################# Frames ####################
+
+ttk.Separator(janela, orient=HORIZONTAL).grid(row=0, columnspan=1, ipadx=157)
+
+frame_principal = Frame(janela, width=320, height=50,
+                        bg=co1, pady=0, padx=0, relief="flat",)
+frame_principal.grid(row=1, column=0)
+
+frame_quadros = Frame(janela, width=320, height=300,
+                        bg=fundo, pady=12, padx=0, relief="flat",)
+frame_quadros.grid(row=2, column=0, sticky=NW)
+
+style = ttk.Style(frame_principal)
+style.theme_use("clam")
+
+
+def info():
+    weather_key = '74db8d03761c1e007553ccbc6d73fe92'
+    cidade = e_local.get()
+    api_link = "https://api.openweathermap.org/data/2.5/weather?q=" + \
+        cidade+"&appid=" + weather_key+"&lang=pt" + "&units=metric"
+
+    # HTTP request
+    r = requests.get(api_link)
+    # convert the data in 'r' into dictionary
+    data = r.json()
+
+    # zona , pais, horas
+    pais_codigo = data['sys']['country']
+
+    zona_fuso = pytz.country_timezones[pais_codigo]
+
+    # --- pais ---
+    pais = pytz.country_names[pais_codigo]
+
+    # --- data ---
+    zona = pytz.timezone(zona_fuso[0])
+    zona_horas = datetime.now(zona)
+    zona_horas = zona_horas.strftime("%d %m %Y | %H:%M:%S %p")
+
+    # ---
+    tempo = data["main"]["temp"]
+
+    descricao = data["weather"][0]["description"]
+
+    # Mudando informaoes
+
+    def country_to_continent(country_name):
+        country_alpha2 = pc.country_name_to_country_alpha2(country_name)
+        country_continent_code = pc.country_alpha2_to_continent_code(
+            country_alpha2)
+        country_continent_name = pc.convert_continent_code_to_continent_name(
+            country_continent_code)
+        return country_continent_name
+
+    continente = country_to_continent(pais)
+
+    l_cidade['text'] = cidade + " - " + pais + " / " + continente
+
+    l_data['text'] = zona_horas
+
+    l_temp['text'] = round(tempo)
+    l_temp_celcius['text'] = 'ºC'
+
+    l_descricao['text'] = descricao
+
+    # apresentado sol e lua
+
+    zona_priodo = datetime.now(zona)
+    zona_priodo = zona_priodo.strftime("%H")
+
+    global imagem
+
+    zona_priodo = int(zona_priodo)
+    if zona_priodo <= 5:
+        imagem = Image.open('img\moon.png')
+        fundo = fundo_noite
+    elif zona_priodo <= 11:
+        imagem = Image.open('img\sun.png')
+        fundo = fundo_dia
+    elif zona_priodo <= 17:
+        imagem = Image.open('img\sun.png')
+        fundo = fundo_tarde
+    elif zona_priodo <= 23:
+        imagem = Image.open('img\moon.png')
+        fundo = fundo_noite
+
+    imagem = imagem.resize((130, 130), Image.LANCZOS)
+    imagem = ImageTk.PhotoImage(imagem)
+    l_icon1 = Label(frame_quadros, image=imagem, compound=LEFT,  bg=fundo,
+                    fg="white", font=('Ivy 10 bold'), anchor="nw", relief=FLAT)
+    l_icon1.place(x=160, y=50)
+
+    # -- Mudando cor do fundo
+
+    janela.configure(bg=fundo)
+    frame_quadros.configure(bg=fundo)
+    frame_principal.configure(bg=fundo)
+
+    l_cidade['bg'] = fundo
+    l_data['bg'] = fundo
+    l_temp['bg'] = fundo
+    l_temp_celcius['bg'] = fundo
+    l_descricao['bg'] = fundo
+
+
+e_local = Entry(frame_principal, text='digite uma cidade', width=20, justify='left',
+                font=("", 14), highlightthickness=1, relief="solid")
+e_local.place(x=15, y=10)
+
+b_ver = Button(frame_principal, command=info, text="Ver clima", height=1,
+                bg=co1, fg=co2, font=('Ivy 9 bold'), relief=RAISED, overrelief=RIDGE)
+b_ver.place(x=250, y=10)
+
+l_cidade = Label(frame_quadros, text="", height=1, padx=0, relief="flat",
+                    anchor="center", font=('Arial 14 '), bg=fundo, fg=co1)
+l_cidade.place(x=10, y=4)
+
+l_data = Label(frame_quadros, text="", height=1, padx=0, relief="flat",
+                anchor="center", font=('Arial 10 '), bg=fundo, fg=co1)
+l_data.place(x=10, y=54)
+
+l_temp = Label(frame_quadros, text="", height=1, padx=0, relief="flat",
+                anchor="center", font=('Arial 45 '), bg=fundo, fg=co1)
+l_temp.place(x=10, y=100)
+
+l_temp_celcius = Label(frame_quadros, text="", height=1, padx=0, relief="flat",
+                        anchor="center", font=('Arial 10 bold '), bg=fundo, fg=co1)
+l_temp_celcius.place(x=85, y=110)
+
+l_descricao = Label(frame_quadros, text="", height=1, padx=0,
+                    relief="flat", anchor="center", font=('Arial 10 '), bg=fundo, fg=co1)
+l_descricao.place(x=170, y=190)
+
+
+janela.mainloop()
+
+</code>
+                    </pre>
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+    </div>
+    <script src="../static/prism.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            Prism.highlightAll();
+        });
+    </script>
+</body>
+
+</html>
+<style>
+    .bemvindo::after {
+        --move1: inset(50% 50% 50% 50%);
+        --move2: inset(31% 0 40% 0);
+        --move3: inset(39% 0 15% 0);
+        --move4: inset(45% 0 40% 0);
+        --move5: inset(45% 0 6% 0);
+        --move6: inset(14% 0 61% 0);
+        clip-path: var(--move1);
+        content: 'APP DE CLIMA PYTHON';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: block;
+    }
+</style>

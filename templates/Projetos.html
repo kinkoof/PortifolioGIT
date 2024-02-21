@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROJETOS</title>
+    <link rel="stylesheet" href="../static/css/projeto.css">
+</head>
+<header>
+    <a href="/templates/index.html">
+        <h1 class="bemvindo">PROJETOS</h1>
+    </a>
+
+    <ul class="listHeader">
+
+        <a href="/templates/Contato.html">
+            <button class="btn">
+                <span>contato</span><i></i>
+            </button>
+        </a>
+
+        <a href="">
+            <button class="btn">
+                <span>projetos</span><i></i>
+            </button>
+        </a>
+
+        <a href="/templates/ToDo.html">
+            <button class="btn">
+                <span>TO DO</span><i></i>
+            </button>
+        </a>
+
+    </ul>
+</header>
+
+<body>
+
+    <div class="center-lista">
+        <div class="lista">
+            <div class="item">
+                <span><a href="../Projetos/CalculadoraJAVA/templates/calculadoraJAVA.html">Calculadora em JAVA</a></span>
+                <hr>
+            </div>
+
+            <div class="item">
+                <span><a href="../Projetos/AppClimaPython/templates/climaPython.html">Ver o clima em Python</a></span>
+                <hr>
+            </div>
+
+            <div class="item">
+                <span><a href="">{{projeto.titulo}}</a></span>
+                <hr>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+<style>
+    .bemvindo::after {
+        --move1: inset(50% 50% 50% 50%);
+        --move2: inset(31% 0 40% 0);
+        --move3: inset(39% 0 15% 0);
+        --move4: inset(45% 0 40% 0);
+        --move5: inset(45% 0 6% 0);
+        --move6: inset(14% 0 61% 0);
+        clip-path: var(--move1);
+        content: 'PROJETOS';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: block;
+    }
+</style>
+
+
+
+</html>

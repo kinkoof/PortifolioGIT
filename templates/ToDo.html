@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO DO</title>
+    <link rel="stylesheet" href="../static/css/todo.css">
+    <script src="../static/js/listatodo.js"></script>
+</head>
+<header>
+    <a href="/templates/index.html">
+        <h1 class="bemvindo">TO DO LIST</h1>
+    </a>
+
+    <ul class="listHeader">
+
+        <a href="/templates/Contato.html">
+            <button class="btn">
+                <span>contato</span><i></i>
+            </button>
+        </a>
+
+        <a href="/templates/Projetos.html">
+            <button class="btn">
+                <span>projetos</span><i></i>
+            </button>
+        </a>
+
+        <a href="">
+            <button class="btn">
+                <span>TO DO</span><i></i>
+            </button>
+        </a>
+
+    </ul>
+</header>
+
+
+<body>
+    <div class="center-lista">
+        <div class="lista">
+
+            <div class="backlog">
+
+                <p class="tipo">backlog</p>
+                <div class="div-tit" id="div-expand" onclick="expand(this)">
+
+                    <p>Ver o curso de Python</p>
+                    <div class="div-oculta">
+                        <hr>
+                        <p>
+                            assistir ao curso de Python para me apronfudar mais na linguagem e relembrar conceitos
+                            esquecidos https://youtu.be/XKHEtdqhLK8?si=IZ0-YbfSEipzHsj2
+                        </p>
+                    </div>
+                </div>
+
+                <div class="div-tit" id="div-expand" onclick="expand(this)">
+
+                    <p>Certificado de Python</p>
+                    <div class="div-oculta">
+                        <hr>
+                        <p>
+                            Fazer o curso de Python gratuito da Cisco NetWorking Academy(Programming Essentials in
+                            Python)
+                        </p>
+                    </div>
+                </div>
+
+                <div class="div-tit" id="div-expand" onclick="expand(this)">
+
+                    <p>Certificado de JavaScript</p>
+                    <div class="div-oculta">
+                        <hr>
+                        <p>
+                            Fazer o curso de JavaScript gratuito da Cisco NetWorking Academy(JavaScript Essentials 1)
+                        </p>
+                    </div>
+                </div>
+
+                <div class="div-tit" id="div-expand" onclick="expand(this)">
+
+                    <p>Ver o curso JavaScript</p>
+                    <div class="div-oculta">
+                        <hr>
+                        <p>
+                            assistir ao curso de Python para me apronfudar mais na linguagem e relembrar conceitos
+                            esquecidos https://youtu.be/lfmg-EJ8gm4?si=4raOGHzTV2Ns9Q-L
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="todo">
+                <p class="tipo">todo</p>
+                <div class="div-tit" id="div-expand" onclick="expand(this)">
+                    <p>Aprender Andoid studio</p>
+                    <div class="div-oculta">
+                        <hr>
+                        <p>Aprender a utlizar o Android studio como tambem dominar suas funcionalidades e aplicações</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="doing">
+                <p class="tipo">doing</p>
+                <div class="div-tit" id="div-expand" onclick="expand(this)">
+                    <p>Assistir ao curso de JAVA</p>
+                    <div class="div-oculta">
+                        <hr>
+                        <p>Assistir ao curso de JAva https://youtu.be/xk4_1vDrzzo?si=iQxLcZYfhUCIGVBI</p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="done">
+                <p class="tipo">done</p>
+
+            </div>
+
+
+
+        </div>
+    </div>
+    <style>
+        .bemvindo::after {
+            --move1: inset(50% 50% 50% 50%);
+            --move2: inset(31% 0 40% 0);
+            --move3: inset(39% 0 15% 0);
+            --move4: inset(45% 0 40% 0);
+            --move5: inset(45% 0 6% 0);
+            --move6: inset(14% 0 61% 0);
+            clip-path: var(--move1);
+            content: 'TO DO LIST';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: block;
+        }
+    </style>
+</body>
+
+
+
+</html>

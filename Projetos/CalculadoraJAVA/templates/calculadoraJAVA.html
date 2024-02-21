@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portifolio</title>
+    <link rel="stylesheet" href="/Projetos/CalculadoraJAVA/static/calculadoraJAVA.css">
+    <link href="../static/prism.css" rel="stylesheet" />
+
+</head>
+<header>
+    <a href="">
+        <h1 class="bemvindo">CALCULADORA JAVA</h1>
+    </a>
+
+    <ul class="listHeader">
+
+        <a href="/templates/Contato.html">
+            <button class="btn">
+                <span>contato</span><i></i>
+            </button>
+        </a>
+
+        <a href="/templates/Projetos.html">
+            <button class="btn">
+                <span>projetos</span><i></i>
+            </button>
+        </a>
+
+        <a href="/templates/ToDo.html">
+            <button class="btn">
+                <span>TO DO</span><i></i>
+            </button>
+        </a>
+
+    </ul>
+</header>
+
+<body>
+    <div class="center-lista">
+        <div class="lista">
+            <div class="descricao">
+                <p>
+                    A calculadora em Java é uma aplicação simples e eficaz que permite aos usuários realizar operações
+                    matemáticas básicas, como adição, subtração, multiplicação e divisão, além de outras funcionalidades
+                    úteis, como limpar a tela, apagar o último caractere digitado e alterar o sinal do número. A
+                    interface gráfica é intuitiva e amigável, com um display de texto para exibir os números e o
+                    resultado das operações, além de botões numéricos e funcionais para interação do usuário.
+
+                <h3>
+                    Recursos Principais:
+                </h3>
+
+                <ul>
+                    Capacidade de realizar operações aritméticas básicas (adição, subtração, multiplicação e
+                    divisão).<br>
+                    Funcionalidade para limpar a tela e reiniciar a operação.<br>
+
+                    Opção para apagar o último caractere digitado.<br>
+
+                    Botão para alterar o sinal do número exibido.<br>
+
+                    Interface gráfica com layout claro e organizado.<br>
+
+                    Utilização de componentes visuais como botões e campo de texto para interação do usuário.
+
+                </ul>
+
+                Este projeto demonstra o uso de conceitos básicos de programação em Java, incluindo manipulação de
+                eventos de botão, tratamento de exceções para conversão de dados e criação de interface gráfica
+                usando a biblioteca Swing. Foi uma aplicação útil para aprender os fundamentos da
+                linguagem Java enquanto desenvolvia uma aplicação prática e funcional.
+                </p>
+
+                <div class="codigo">
+                    <p class="tipo">codigo</p>
+                    <P>ou clique <a href="https://github.com/kinkoof/Calculadora_java/blob/main/Calculadora/src/MainPanel.java">aqui</a> para visualizar o codigo no GitHub</P>
+
+                    <pre>
+<code class="language-java line-numbers">import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class MainPanel implements ActionListener {
+
+JFrame frame;
+JTextField text;
+JButton[] numButtons = new JButton[10];
+JButton[] funcButtons = new JButton[9];
+JButton add, sub, mul, div, dec, equal, del, clear, neg;
+JPanel panel;
+
+double num1 = 0, num2 = 0, result = 0;
+char operador;
+
+Font font = new Font("DialogInput", Font.BOLD, 30);
+
+MainPanel() {
+    frame = new JFrame("Calculadora em Java");
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setSize(420, 550);
+    frame.setLayout(null);
+    frame.getContentPane().setBackground(Color.black);
+
+
+
+    text = new JTextField();
+    text.setBounds(50, 25, 300, 50);
+    text.setFont(font);
+    text.setBackground(Color.black);
+    text.setEditable(false);
+    text.setForeground(Color.green);
+
+    add = new JButton("+");
+    sub = new JButton("-");
+    mul = new JButton("X");
+    div = new JButton("÷");
+    dec = new JButton(".");
+    equal = new JButton("=");
+    del = new JButton("Del");
+    clear = new JButton("C");
+    neg = new JButton("(-)");
+
+    funcButtons[0] = add;
+    funcButtons[1] = sub;
+    funcButtons[2] = mul;
+    funcButtons[3] = div;
+    funcButtons[4] = dec;
+    funcButtons[5] = equal;
+    funcButtons[6] = del;
+    funcButtons[7] = clear;
+    funcButtons[8] = neg;
+
+    for (JButton botao : funcButtons) {
+        botao.addActionListener(this);
+        botao.setFont(font);
+        botao.setBackground(Color.LIGHT_GRAY);
+        botao.setFocusable(false);
+
+    }
+
+    for (int i = 0; i < numButtons.length; i++) {
+        numButtons[i] = new JButton(String.valueOf(i));
+        numButtons[i].addActionListener(this);
+        numButtons[i].setFont(font);
+        numButtons[i].setBackground(Color.LIGHT_GRAY);
+        numButtons[i].setFocusable(false);
+    }
+
+    del.setBounds(45, 430, 100, 50);
+    clear.setBounds(150, 430, 100, 50);
+    neg.setBounds(255,430,100,50);
+
+    panel = new JPanel();
+    panel.setBackground(Color.black);
+    panel.setBounds(50, 100, 300, 300);
+    panel.setLayout(new GridLayout(4, 4, 10, 10));
+
+    panel.add(numButtons[1]);
+    panel.add(numButtons[2]);
+    panel.add(numButtons[3]);
+    panel.add(add);
+    panel.add(numButtons[4]);
+    panel.add(numButtons[5]);
+    panel.add(numButtons[6]);
+    panel.add(sub);
+    panel.add(numButtons[7]);
+    panel.add(numButtons[8]);
+    panel.add(numButtons[9]);
+    panel.add(mul);
+    panel.add(dec);
+    panel.add(numButtons[0]);
+    panel.add(equal);
+    panel.add(div);
+
+    frame.add(panel);
+    frame.add(neg);
+    frame.add(clear);
+    frame.add(del);
+    frame.add(text);
+    frame.setVisible(true);
+
+}
+
+@Override
+public void actionPerformed(ActionEvent e) {
+    for (int i = 0; i < numButtons.length; i++) {
+        if (e.getSource() == numButtons[i]) {
+            text.setText(text.getText().concat(String.valueOf(i)));
+        }
+    }
+    if (e.getSource() == dec) {
+        text.setText(text.getText().concat("."));
+    }
+    if (e.getSource() == add) {
+        text.setText(text.getText());
+        num1 = Double.parseDouble(text.getText());
+        operador = '+';
+        text.setText("");
+    }
+    if (e.getSource() == sub) {
+        text.setText(text.getText());
+        num1 = Double.parseDouble(text.getText());
+        operador = '-';
+        text.setText("");
+    }
+    if (e.getSource() == mul) {
+        text.setText(text.getText());
+        num1 = Double.parseDouble(text.getText());
+        operador = '*';
+        text.setText("");
+    }
+    if (e.getSource() == div) {
+        text.setText(text.getText());
+        num1 = Double.parseDouble(text.getText());
+        operador = '/';
+        text.setText("");
+    }
+    if (e.getSource() == equal) {
+        num2 = Double.parseDouble(text.getText());
+
+        switch (operador) {
+
+            case '+':
+                result = num1 + num2;
+                break;
+
+            case '-':
+                result = num1 - num2;
+                break;
+
+            case '/':
+                result = num1 / num2;
+                break;
+
+            case '*':
+                result = num1 * num2;
+                break;
+
+            default:
+                break;
+        }
+
+        text.setText(String.valueOf(result));
+        num1 = result;
+
+    }
+
+    if (e.getSource() == clear) {
+        text.setText("");
+    }
+
+    if (e.getSource() == del) {
+        String str = text.getText();
+        text.setText("");
+        for (int i = 0; i < str.length() - 1; i++) {
+            text.setText(text.getText() + str.charAt(i));
+        }
+    }
+
+    if (e.getSource() == neg) {
+        double temp = Double.parseDouble(text.getText());
+        temp *= -1;
+        text.setText(String.valueOf(temp));
+    }
+}
+
+public static void main(String[] args) {
+    new MainPanel();
+}
+
+}
+</code>
+                    </pre>
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+    </div>
+    <script src="../static/prism.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            Prism.highlightAll();
+        });
+    </script>
+</body>
+
+</html>
+<style>
+    .bemvindo::after {
+        --move1: inset(50% 50% 50% 50%);
+        --move2: inset(31% 0 40% 0);
+        --move3: inset(39% 0 15% 0);
+        --move4: inset(45% 0 40% 0);
+        --move5: inset(45% 0 6% 0);
+        --move6: inset(14% 0 61% 0);
+        clip-path: var(--move1);
+        content: 'CALCULADORA JAVA';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: block;
+    }
+</style>
